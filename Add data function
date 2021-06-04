@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jun  4 16:00:44 2021
+
+@author: Ali
+"""
+
+@app.route('/AddData', methods=('GET', 'POST'))
+def Adddata():
+    if load_logged_in_user():
+        if request.method == 'POST' :
+            
+            longintude = request.form['longintude'] 
+            latitude = request.form['latitude'] 
+            Technician_Name = request.form['Technician Name'] 
+            Habitat_Type = request.form['Habitat Type']
+            Water_Source = request.form['Water Source']
+            Vegetation_Type = request.form['Vegetation Type']
+            Height_Grass_cm = request.form['Height Grass_cm']
+            Temperature = request.form['Temperature']
+            Humidity = request.form['Humidity']
+            Density_Grass_cm = request.form['Density Grass_cm']
+            Moisture_content = request.form['Moisture content']
+            error = None
+            
+           
+            
+             
+            if not longintude :
+                error = 'longintude is required!'
+            if not latitude :
+                error = 'latitude is required!'
+            
+            if not Technician_Name :
+                error = 'Technician_Name is required!'
+            if not Habitat_Type :
+                error = 'Habitat_Type is required!' 
+            if not Water_Source :
+                error = 'Water_Source is required!'
+            if not Vegetation_Type :
+                error = 'Vegetation_Type is required!'
+            if not Height_Grass_cm :
+                error = 'Height_Grass_cm is required!'
+            if not Temperature :
+                error = 'Temperature is required!'
+            if not Humidity :
+                error = 'Humidity is required!'
+            if not Density_Grass_cm :
+                error = 'Density_Grass_cm is required!'
+            if not Moisture_content :
+                error = 'Moisture_content is required!'
+              
+            if error is not None :
+                flash(error)
+                return redirect(url_for('index_copy'))
+            else : 
+                    myFile = open('dbConfig.txt')
+                    connStr = myFile.readline()
+                    conn = connect(connStr)
+                    cur = conn.cursor()
+                    cur.execute('INSERT INTO userdata_table ( longintude, latitude, Technician_Name, Habitat_Type, Water_Source,Vegetation_Type, Height_Grass_cm, Temperature, Humidity, Density_Grass_cm, Moisture_content, user_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', 
+                               ( longintude, latitude,  Technician_Name, Habitat_Type, Water_Source, Vegetation_Type, Height_Grass_cm, Temperature, Humidity, Density_Grass_cm, Moisture_content, g.user[0])
+                               )
+                    cur.close()
+                    conn.commit()
+                    conn.close()
+                    return redirect(url_for('index_copy'))
+        else :
+            return render_template('blog/create_copy.html')
+    else :
+        error = 'Only loggedin users can insert AddData !'
+        flash(error)
+        return redirect(url_for('login'))  
