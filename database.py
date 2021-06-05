@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+   # -*- coding: utf-8 -*-
 """
 Created on Tue May 18 18:07:58 2021
 
@@ -18,7 +18,9 @@ from sqlalchemy import create_engine
 cleanup = (
         'DROP TABLE IF EXISTS system_table CASCADE',
         'DROP TABLE IF EXISTS comments_table',
+        'DROP TABLE IF EXISTS userdata_table',
         'DROP TABLE IF EXISTS data_table'
+        
         )
 
 commands =(
@@ -42,7 +44,31 @@ commands =(
                 FOREIGN KEY (user_id)
                     REFERENCES system_table (user_id)
         )
-        """)
+        """
+        ,
+        """
+        CREATE TABLE userdata_table (
+            data_id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL,
+                created TIMESTAMP DEFAULT NOW(),
+                longintude VARCHAR(350) NOT NULL,
+                latitude VARCHAR(350) NOT NULL,
+                Technician_Name VARCHAR(350) NOT NULL,
+                Habitat_Type VARCHAR(350) NOT NULL,
+                Water_Source VARCHAR(350) NOT NULL,
+                Vegetation_Type VARCHAR(350) NOT NULL,
+                Height_Grass_cm VARCHAR(350) NOT NULL,
+                Temperature VARCHAR(350) NOT NULL,
+                Humidity VARCHAR(350) NOT NULL,
+                Density_Grass_cm VARCHAR(350) NOT NULL,
+                Moisture_content VARCHAR(350) NOT NULL,
+                FOREIGN KEY (user_id)
+                    REFERENCES system_table (user_id) 
+                
+               
+        )
+        """            
+        )
 
 sqlCommands = (
         'INSERT INTO system_table (username, password, email) VALUES (%s, %s, %s) RETURNING user_id',
@@ -80,6 +106,8 @@ data_df['Habitat Type'] = data_df['16_Habitat_Type']
 data_df['Water Source'] = data_df['18_Water_Source']
 data_df['Vegetation Type'] = data_df['25_Vegetation_Type']
 data_df['Height Grass_cm'] = data_df['29_Height_Grass_cm']
+data_df['Temperature'] = data_df['12_Temperature']
+data_df['Humidity'] = data_df['13_Humidity']
 data_df['Density Grass_cm'] = data_df['30_Density_Grass_cm']
 data_df['Moisture content'] = data_df['31_Moisture_content_']
 data_df = data_df.loc[:,'site_id':'Moisture content']
@@ -88,5 +116,12 @@ engine = create_engine('postgresql://postgres:uno12345@localhost:5432/DBS')
 data_df.to_sql('data_table', engine, if_exists = 'replace', index=False)
 
         
+
+
+
+
+
+
+
 
 
