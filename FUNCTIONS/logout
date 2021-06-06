@@ -1,0 +1,27 @@
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('Home'))
+
+#@app.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        myFile = open('dbConfig.txt')
+        connStr = myFile.readline()
+        conn = connect(connStr)
+        cur = conn.cursor()
+        cur.execute(
+                    'SELECT * FROM system_table WHERE user_id = %s', (user_id,)
+        )
+        g.user = cur.fetchone()
+        cur.close()
+        conn.commit()
+        conn.close()
+    if g.user is None:
+        return False
+    else: 
+        return True
