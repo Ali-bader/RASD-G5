@@ -1,0 +1,11 @@
+@app.route('/<int:id>/deletecomment', methods=('POST',))
+def deletecomment(id):
+    myFile = open('dbConfig.txt')
+    connStr = myFile.readline()
+    conn = connect(connStr)
+                
+    cur = conn.cursor()
+    cur.execute('DELETE FROM comments_table WHERE comment_id = %s', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('addcomment')) 
