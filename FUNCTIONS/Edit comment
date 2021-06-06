@@ -1,0 +1,33 @@
+@app.route('/<int:id>/editcomment', methods=('GET', 'POST'))
+def editcomment(id):
+    if load_logged_in_user():
+        post = get_post(id)
+        if request.method == 'POST' :
+            title = request.form['title']
+            body = request.form['body']
+            error = None
+            
+            if not title :
+                error = 'Title is required!'
+            if error is not None :
+                flash(error)
+                return redirect(url_for('index'))
+            else : 
+                myFile = open('dbConfig.txt')
+                connStr = myFile.readline()
+                conn = connect(connStr)
+                cur = conn.cursor()
+                cur.execute('UPDATE comments_table SET title = %s, body = %s'
+                               'WHERE comment_id = %s', 
+                               (title, body, id)
+                               )
+                cur.close()
+                conn.commit()
+                conn.close()
+                return redirect(url_for('index'))
+        else :
+            return render_template('auth/update.html', comments_table=post)
+    else :
+        error = 'Only loggedin users can insert comments!'
+        flash(error)
+        return redirect(url_for('login'))
