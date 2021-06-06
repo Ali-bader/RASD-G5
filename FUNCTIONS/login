@@ -1,0 +1,29 @@
+@app.route('/login', methods=('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        conn= get_dbConn()
+        cur = conn.cursor()
+        error = None
+        cur.execute(
+       'SELECT * FROM system_table WHERE username = %s', (username,) 
+        )
+        user = cur.fetchone()
+        cur.close()
+        conn.commit()
+        
+
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user[2], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user[0]
+            return redirect(url_for('page'))    
+
+        flash(error)
+
+    return render_template('auth/login.html')
