@@ -1,1 +1,55 @@
 
+# -*- coding: utf-8 -*-
+"""
+Created on Sat May 29 20:07:06 2021
+
+@author: Ali
+"""
+import geopandas as gpd
+from sqlalchemy import create_engine
+import pandas as pd
+from bokeh.models import ColumnDataSource, GMapOptions , LabelSet
+from bokeh.plotting import gmap
+#from bokeh.models import ColumnDataSource, Labelset 
+from bokeh.tile_providers import CARTODBPOSITRON, get_provider   
+from bokeh.plotting import figure, show, output_file
+from bokeh.io import output_notebook
+output_notebook()
+
+
+
+engine = create_engine('postgresql://postgres:uno12345@localhost:5432/DBS')
+df_sql = pd.read_sql_table('data_table',engine)
+data_geodf = gpd.GeoDataFrame(df_sql,geometry=gpd.points_from_xy(df_sql['longintude'],df_sql['latitude']))
+gdf = data_geodf.set_crs(epsg=4326, inplace=True).to_crs(epsg=3857)
+
+
+
+
+def getpointcoords(rows, geom, coord_type):
+    """calculates coordinate ('x' or 'y') of a point geometry"""
+    if coord_type =='x':
+        return rows[geom].x
+    elif coord_type=='y':
+        return rows[geom].y 
+
+gdf['x']= gdf.apply(getpointcoords, geom='geometry',coord_type='x',axis=1)
+gdf['y']= gdf.apply(getpointcoords, geom='geometry',coord_type='y',axis=1)
+
+data_geodf_df =gdf.drop('geometry', axis=1).copy()
+psource=ColumnDataSource(data_geodf_df)
+
+TOOLTIPS= [
+    ("longitude","@longintude"),
+    ("latitude","@latitude")]
+p1 = figure(x_range=(-2000000, 6000000), y_range=(-1000000, 7000000),
+           x_axis_type="mercator", y_axis_type="mercator",tooltips=TOOLTIPS)
+p1.add_tile(get_provider(CARTODBPOSITRON))
+p1.circle('x','y', source=psource, color='red', radius=5 )
+
+labels= LabelSet(x='x', y='y', text='index', level="glyph", x_offset=5, y_offset=5, source=psource, render_mode='css')
+p1.add_layout(labels)
+output_file("C:/Users/Ali/Desktop/polt2.html") 
+show(p1)
+
+
