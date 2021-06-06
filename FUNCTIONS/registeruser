@@ -1,0 +1,37 @@
+@app.route('/register', methods=('GET', 'POST'))
+def registeruser():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+        error = None
+
+        if not username:
+            error = 'Username is required.'
+        elif not password:
+            error = 'Password is required.'
+        else :
+            myFile = open('dbConfig.txt')
+            connStr = myFile.readline()
+            conn = connect(connStr)
+            cur = conn.cursor()
+            cur.execute(
+           'SELECT user_id FROM system_table WHERE username = %s', (username,))
+            if cur.fetchone() is not None:
+                error = 'User {} is already registered.'.format(username)
+                cur.close()
+                conn.close()
+
+        if error is None:
+            cur.execute(
+                'INSERT INTO system_table (username, password ,email) VALUES (%s, %s,%s)',
+                (username, generate_password_hash(password), email)
+            )
+            cur.close()
+            conn.commit()
+            conn.close()
+            return redirect(url_for('login'))
+
+        flash(error)
+
+    return render_template('auth/register.html')
