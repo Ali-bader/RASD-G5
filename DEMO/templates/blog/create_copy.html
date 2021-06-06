@@ -1,0 +1,57 @@
+{% extends 'Home.html' %}
+
+{% block header %}
+  <h1>{% block title %}New Post{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="longintude">longintude</label>
+    <input name="longintude" id="longintude" value="{{ request.form['longintude'] }}" required>
+    <label for="latitude">latitude</label>
+    <input name="latitude" id="latitude" value="{{ request.form['latitude'] }}" required>
+    
+    <label for="Technician_Name">Technician_Name</label>
+    <input name="Technician_Name" id="Technician_Name" value="{{ request.form['Technician_Name'] }}" required>
+    <label for="Habitat_Type">Habitat_Type</label>
+    <input name="Habitat_Type" id="Habitat_Type" value="{{ request.form['Habitat_Type'] }}" required>
+    <label for="Water_Source">Water_Source</label>
+    <input name="Water_Source" id="Water_Source" value="{{ request.form['Water_Source'] }}" required>
+    <label for="Vegetation_Type">Vegetation_Type</label>
+    <input name="Vegetation_Type" id="Vegetation_Type" value="{{ request.form['Vegetation_Type'] }}" required>
+    <label for="Height_Grass_cm">Height_Grass_cm</label>
+    <input name="Height_Grass_cm" id="Height Grass_cm" value="{{ request.form['Height_Grass_cm'] }}" required>
+    <label for="Temperature">Temperature</label>
+    <input name="Temperature" id="Temperature" value="{{ request.form['Temperature'] }}" required>
+    <label for="Humidity">Humidity</label>
+    <input name="Humidity" id="Humidity" value="{{ request.form['Humidity'] }}" required>
+    <label for="Density_Grass_cm">Density_Grass_cm</label>
+    <input name="Density_Grass_cm" id="Density_Grass_cm" value="{{ request.form['Density_Grass_cm'] }}" required>
+    <label for="Moisture_content">Moisture_content</label>
+    <input name="Moisture_content" id="Moisture_content" value="{{ request.form['Moisture_content'] }}" required>
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
