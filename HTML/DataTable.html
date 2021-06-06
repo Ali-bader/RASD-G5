@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Analysis</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="../static/assets/img/favicon.png" rel="icon">
+  <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Table Styling -->
+
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    th {
+      background-color: #04AA6D;
+      color: white;
+    }
+  </style>
+
+  <!-- Vendor CSS Files -->
+  <link href="../static/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"
+
+  <!-- =======================================================
+  * Template Name: Moderna - v4.2.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1 class="text-light"><a href="/page"><span>GeoApp</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="" href="/page">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/visulization">Visualization</a></li>
+          <li><a class="active" href="/analysis">Analysis</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Our Portfolio Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Our database</h2>
+          <ol>
+            <li><a href="/page">Home</a></li>
+            <li>Data Analysis</li>
+          </ol>
+        </div>
+
+      </div>
+
+    </section><!-- End Our Portfolio Section -->
+
+        <!-- ======= Portfolio Section ======= -->
+    <section class="portfolio">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <ul id="portfolio-flters">
+              <li data-filter="*" ><a href="/basemap">Base Map</a></li>
+              <li data-filter=".filter-card"class="filter-active"><a href="/datatable">Data Table</a>li>
+              <li data-filter=".filter-card"><a href="/AddData">Add Data</a></li>
+              <li data-filter=".filter-web"><a href="/addcomment">Comments</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class= "table entrances" style="overflow-x: auto;">
+      <table id="table">
+      <thead></thead>
+      <tr></tr>>
+    </section><!-- End Portfolio Section -->
+
+<table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>site_id</th>
+      <th>longintude</th>
+      <th>latitude</th>
+      <th>Observation_date</th>
+      <th>time</th>
+      <th>Technician Name</th>
+      <th>Habitat Type</th>
+      <th>Water Source</th>
+      <th>Vegetation Type</th>
+      <th>Height Grass_cm</th>
+      <th>Temperature</th>
+      <th>Humidity</th>
+      <th>Density Grass_cm</th>
+      <th>Moisture content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Yupukari_Top</td>
+      <td>-59.352783</td>
+      <td>3.656008</td>
+      <td>31/05/2021</td>
+      <td>09:32</td>
+      <td>Felix_Holden</td>
+      <td>Pond-Bush Edge</td>
+      <td>Pond</td>
+      <td>Shrub/Trees Mix</td>
+      <td>200</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>High (grass is green)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Yupukari_Top</td>
+      <td>-59.353035</td>
+      <td>3.656410</td>
+      <td>31/05/2021</td>
+      <td>09:24</td>
+      <td>Felix_Holden</td>
+      <td>Pond-Bush Edge</td>
+      <td>NaN</td>
+      <td>Shrub/Trees Mix</td>
+      <td>200</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>High (grass is green)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Yupukari_Top</td>
+      <td>-59.353332</td>
+      <td>3.656816</td>
+      <td>31/05/2021</td>
+      <td>09:16</td>
+      <td>Eloisesa_Dorrick</td>
+      <td>Forest Bush</td>
+      <td>NaN</td>
+      <td>Trees</td>
+      <td>200</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>High (grass is green)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Yupukari_Top</td>
+      <td>-59.353502</td>
+      <td>3.657138</td>
+      <td>31/05/2021</td>
+      <td>09:09</td>
+      <td>Felix_Holden</td>
+      <td>Grassland_Savanna_with trees</td>
+      <td>NaN</td>
+      <td>Grass/Shrub Mix</td>
+      <td>48</td>
+      <td>0</td>
+      <td>0</td>
+      <td>Full (100%)</td>
+      <td>Medium (grass green &amp; brown mixed)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Yupukari_Top</td>
+      <td>-59.353801</td>
+      <td>3.657497</td>
+      <td>31/05/2021</td>
+      <td>09:02</td>
+      <td>Lauwana_Laurindo</td>
+      <td>Grassland_Savanna_with trees</td>
+      <td>NaN</td>
+      <td>Grass/Shrub Mix</td>
+      <td>63</td>
+      <td>0</td>
+      <td>0</td>
+      <td>Full (100%)</td>
+      <td>Medium (grass green &amp; brown mixed)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Yupukari_Top</td>
+      <td>-59.354077</td>
+      <td>3.657875</td>
+      <td>31/05/2021</td>
+      <td>08:57</td>
+      <td>Eloisesa_Dorrick</td>
+      <td>Hill with grass and shrubs</td>
+      <td>NaN</td>
+      <td>Grass</td>
+      <td>44</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>High (grass is green)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Yupukari_Top</td>
+      <td>-59.354325</td>
+      <td>3.658206</td>
+      <td>31/05/2021</td>
+      <td>08:43</td>
+      <td>Felix_Holden</td>
+      <td>Grassland_Savanna_with trees</td>
+      <td>Stream</td>
+      <td>Grass/Shrub Mix</td>
+      <td>40</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>High (grass is green)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Yupukari_Top</td>
+      <td>-59.354467</td>
+      <td>3.658620</td>
+      <td>31/05/2021</td>
+      <td>08:37</td>
+      <td>Lauwana_Laurindo</td>
+      <td>Grassland_Savanna_with trees</td>
+      <td>NaN</td>
+      <td>Grass/Shrub Mix</td>
+      <td>21</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>Medium (grass green &amp; brown mixed)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Yupukari_Top</td>
+      <td>-59.354827</td>
+      <td>3.659000</td>
+      <td>31/05/2021</td>
+      <td>08:34</td>
+      <td>Eloisesa_Dorrick</td>
+      <td>Hill with grass and shrubs</td>
+      <td>NaN</td>
+      <td>Grass</td>
+      <td>48</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>Medium (grass green &amp; brown mixed)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Yupukari_Top</td>
+      <td>-59.354993</td>
+      <td>3.659396</td>
+      <td>31/05/2021</td>
+      <td>08:28</td>
+      <td>Felix_Holden</td>
+      <td>Grassland_Savanna_with trees</td>
+      <td>NaN</td>
+      <td>Grass/Shrub Mix</td>
+      <td>60</td>
+      <td>0</td>
+      <td>0</td>
+      <td>High (50-75%)</td>
+      <td>High (grass is green)</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+               Piazza Leonardo da vinci <br>
+              Milan, MI 20133<br>
+              Italy <br><br>
+              <strong>Phone:</strong> +1 5589 55488 55<br>
+              <strong>Email:</strong> info@example.com<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>About Geoapp</h3>
+            <p>See About Section</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>GeoApp</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+        <!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="../static/assets/vendor/aos/aos.js"></script>
+  <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="../static/assets/vendor/purecounter/purecounter.js"></script>
+  <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="../static/assets/js/main.js"></script>
+
+</body>
+
+</html>
