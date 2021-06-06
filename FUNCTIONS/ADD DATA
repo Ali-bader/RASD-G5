@@ -1,1 +1,87 @@
 
+@app.route('/AddData', methods=('GET', 'POST'))
+def Adddata():
+    if load_logged_in_user():
+        if request.method == 'POST' :
+            longintude = request.form['longintude'] 
+            latitude = request.form['latitude'] 
+            Technician_Name = request.form['Technician_Name'] 
+            Habitat_Type = request.form['Habitat_Type']
+            Water_Source = request.form['Water_Source']
+            Vegetation_Type = request.form['Vegetation_Type']
+            Height_Grass_cm = request.form['Height_Grass_cm']
+            Temperature = request.form['Temperature']
+            Humidity = request.form['Humidity']
+            Density_Grass_cm = request.form['Density_Grass_cm']
+            Moisture_content = request.form['Moisture_content']
+            error = None
+            
+           
+            
+            
+
+            if not longintude :
+                error = 'longintude is required!'
+            if not latitude :
+                error = 'latitude is required!'
+            
+            if not Technician_Name :
+                error = 'Technician_Name is required!'
+            if not Habitat_Type :
+                error = 'Habitat_Type is required!' 
+            if not Water_Source :
+                error = 'Water_Source is required!'
+            if not Vegetation_Type :
+                error = 'Vegetation_Type is required!'
+            if not Height_Grass_cm :
+                error = 'Height_Grass_cm is required!'
+            if not Temperature :
+                error = 'Temperature is required!'
+            if not Humidity :
+                error = 'Humidity is required!'
+            if not Density_Grass_cm :
+                error = 'Density_Grass_cm is required!'
+            if not Moisture_content :
+                error = 'Moisture_content is required!'
+              
+            if error is not None :
+                flash(error)
+                return redirect(url_for('index_copy'))
+            else : 
+                    myFile = open('dbConfig.txt')
+                    connStr = myFile.readline()
+                    conn = connect(connStr)
+                    cur = conn.cursor()
+                    cur.execute('INSERT INTO userdata_table (user_id, longintude, latitude, Technician_Name, Habitat_Type, Water_Source,Vegetation_Type, Height_Grass_cm, Temperature, Humidity, Density_Grass_cm, Moisture_content) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', 
+                               ( g.user[0],longintude, latitude,  Technician_Name, Habitat_Type, Water_Source, Vegetation_Type, Height_Grass_cm, Temperature, Humidity, Density_Grass_cm, Moisture_content)
+                               )
+                    cur.close()
+                    conn.commit()
+                    conn.close()
+                    return redirect(url_for('Adddata'))
+        else :
+            return render_template('auth/AddData.html')
+    else :
+        error = 'Only loggedin users can insert AddData !'
+        flash(error)
+        return redirect(url_for('login'))  
+def get_Adddata(id):
+    myFile = open('dbConfig.txt')
+    connStr = myFile.readline()
+    conn = connect(connStr)
+    cur = conn.cursor()
+    cur.execute(
+        """SELECT *
+           FROM data_table
+           WHERE data_table.index = %s""",
+        (id,)
+    )
+    Adddata = cur.fetchone()
+
+    if Adddata is None:
+        abort(404, "index {} doesn't exist.".format(id))
+
+    if Adddata[1] != g.user[0]:
+        abort(403)
+
+    return Adddata
